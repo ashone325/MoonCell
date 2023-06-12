@@ -10,5 +10,7 @@ public interface Auserservice {
      Auser login(String name,String pwd);
      void Insert(String name,String password);
 
+     boolean updateUser(String name,String pwd,String userimg);
+
 
 }

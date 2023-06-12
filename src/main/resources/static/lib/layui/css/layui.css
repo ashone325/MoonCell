@@ -3549,7 +3549,8 @@ body .layui-table-tips .layui-layer-content {
     width: 30px;
     height: 30px;
     margin-right: 10px;
-    border-radius: 50%
+    border-radius: 50%;
+    float: right;
 }
 
 .layui-nav .layui-nav-more {

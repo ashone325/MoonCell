@@ -7,6 +7,7 @@ public class Auser {
 
     private String userimg;
 
+
     public String getName() {
         return name;
     }

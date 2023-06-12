@@ -30,7 +30,7 @@ public interface AuserMapper {
 
     int updateByExample(@Param("record") Auser record, @Param("example") AuserExample example);
 
-    int updateByPrimaryKeySelective(Auser record);
+    boolean updateByPrimaryKeySelective(Auser record);
 
     int updateByPrimaryKey(Auser record);
     @Insert("insert into auser(name,pwd)values(#{name},#{password})")

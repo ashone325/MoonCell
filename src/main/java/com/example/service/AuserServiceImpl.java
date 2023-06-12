@@ -26,7 +26,17 @@ public class AuserServiceImpl implements Auserservice {
     }
     @Override
     public void Insert(String name,String password){
-        auserMapper.saveInfo(name, password);
+        String md5pwd = MD5Util.MD5Encode(password,"utf-8");
+        auserMapper.saveInfo(name, md5pwd);
+    }
+
+    @Override
+    public boolean updateUser(String name, String pwd, String userimg) {
+        Auser auser=new Auser();
+        auser.setName(name);
+        auser.setPwd(pwd);
+        auser.setUserimg(userimg);
+        return auserMapper.updateByPrimaryKeySelective(auser);
     }
 
 }
