@@ -6,6 +6,7 @@ public class Auser {
     private String pwd;
 
     private String userimg;
+    private String userpower;
 
 
     public String getName() {
@@ -26,6 +27,9 @@ public class Auser {
 
     public String getUserimg() {
         return userimg;
+    }
+    public String getUserpower(){
+        return userpower;
     }
 
     public void setUserimg(String userimg) {

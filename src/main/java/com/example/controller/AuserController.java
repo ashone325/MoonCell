@@ -58,6 +58,7 @@ public class AuserController {
             session.setAttribute("name", auser.getName());
             session.setAttribute("pwd", auser.getPwd());
             session.setAttribute("userimg", auser.getUserimg());
+            session.setAttribute("userpower",auser.getUserpower());
             //return "admin/index"; //地址不变，index.html直接加载到当前页面
             return "redirect:/admin/sys_index"; //地质发生变化，变为admin/sys_index
 
