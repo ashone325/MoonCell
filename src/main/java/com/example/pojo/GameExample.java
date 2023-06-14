@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DepartmentExample {
+public class GameExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DepartmentExample() {
+    public GameExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

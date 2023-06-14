@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>部门新建</title>
+    <title>游戏新建</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -26,22 +26,22 @@
         <div class="layui-form">
             <div class="layui-form-item">
                 <label for="dname" class="layui-form-label">
-                    <span class="x-red">*</span>部门名称</label>
+                    <span class="x-red">*</span>游戏名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="dname" name="dname" lay-verify="required" placeholder="输入部门名称（必填）"
+                    <input type="text" id="dname" name="dname" lay-verify="required" placeholder="输入游戏名称（必填）"
                            autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label for="dtel" class="layui-form-label">
-                    <span class="x-red">*</span>部门电话</label>
+                    <span class="x-red">*</span>游戏类型</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="dtel" name="dtel" lay-verify="required" placeholder="输入部门电话（必填）"
+                    <input type="text" id="dtel" name="dtel" lay-verify="required" placeholder="输入游戏类型（必填）"
                            autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="description" class="layui-form-label">部门描述</label>
+                <label for="description" class="layui-form-label">游戏描述</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="description" name="description" placeholder="输入部门描述"
+                    <input type="text" id="description" name="description" placeholder="输入游戏描述"
                            autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
@@ -62,7 +62,7 @@
         form.on('submit(submit)', function (data) {
             console.log(data.field);
             $.ajax({
-                url: "/admin/department/add",
+                url: "/admin/game/add",
                 type: "post",
                 data: data.field,//用contoller的第二种方法这个就要改为data: JSON.stringify(data.field),contentType : "application/json",
                 success: function (s) {

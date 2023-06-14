@@ -190,4 +190,10 @@
       userimg = #{userimg,jdbcType=VARCHAR}
     where name = #{name,jdbcType=VARCHAR}
   </update>
+  <select id="checkAdminByname" parameterType="java.lang.String">
+    select is_admin
+    from auser
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

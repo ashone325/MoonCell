@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dao.DepartmentMapper">
-  <resultMap id="BaseResultMap" type="com.example.pojo.Department">
+<mapper namespace="com.example.dao.GameMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.Game">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="dname" jdbcType="VARCHAR" property="dname" />
     <result column="dtel" jdbcType="VARCHAR" property="dtel" />
@@ -69,13 +69,13 @@
   <sql id="Base_Column_List">
     id, dname, dtel, description, establishmentdate
   </sql>
-  <select id="selectByExample" parameterType="com.example.pojo.DepartmentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.pojo.GameExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from department
+    from game
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,27 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from department
+    from game
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from department
+    delete from game
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.pojo.DepartmentExample">
-    delete from department
+  <delete id="deleteByExample" parameterType="com.example.pojo.GameExample">
+    delete from game
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.pojo.Department">
-    insert into department (id, dname, dtel, 
+  <insert id="insert" parameterType="com.example.pojo.Game">
+    insert into game (id, dname, dtel,
       description, establishmentdate)
     values (#{id,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{dtel,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{establishmentdate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.pojo.Department">
-    insert into department
+  <insert id="insertSelective" parameterType="com.example.pojo.Game">
+    insert into game
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -142,14 +142,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.pojo.DepartmentExample" resultType="java.lang.Long">
-    select count(*) from department
+  <select id="countByExample" parameterType="com.example.pojo.GameExample" resultType="java.lang.Long">
+    select count(*) from game
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update department
+    update game
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update department
+    update game
     set id = #{record.id,jdbcType=INTEGER},
       dname = #{record.dname,jdbcType=VARCHAR},
       dtel = #{record.dtel,jdbcType=VARCHAR},
@@ -182,8 +182,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Department">
-    update department
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Game">
+    update game
     <set>
       <if test="dname != null">
         dname = #{dname,jdbcType=VARCHAR},
@@ -200,37 +200,37 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Department">
-    update department
+  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Game">
+    update game
     set dname = #{dname,jdbcType=VARCHAR},
       dtel = #{dtel,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       establishmentdate = #{establishmentdate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findDepartmentList" resultMap="BaseResultMap">
+  <select id="findgameList" resultMap="BaseResultMap">
      select
         <include refid="Base_Column_List"/>
-     from department
+     from game
      order by establishmentdate desc
         <if test="start!=null and limit!=null">
            limit #{start},#{limit}
         </if>
   </select>
-  <select id="getTotalDepartments" resultType="int">
-     select count(*) from department
+  <select id="getTotalgames" resultType="int">
+     select count(*) from game
   </select>
-  <select id="findDepartmentListByname" resultMap="BaseResultMap">
+  <select id="findgameListByname" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from department
+    from game
     where dname like'%${dname}%'
     order by establishmentdate desc
     <if test="start!=null and limit!=null">
       limit #{start},#{limit}
     </if>
   </select>
-  <select id="getTotalDepartmentsByname" resultType="int">
-    select count(*) from department where dname like'%${dname}%'
+  <select id="getTotalgamesByname" resultType="int">
+    select count(*) from game where dname like'%${dname}%'
   </select>
 </mapper>

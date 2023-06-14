@@ -1,9 +1,7 @@
 package com.example.service;
 import com.example.dao.AuserMapper;
 import com.example.pojo.Auser;
-import com.example.service.Auserservice;
 import com.example.util.MD5Util;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +26,11 @@ public class AuserServiceImpl implements Auserservice {
     public void Insert(String name,String password){
         String md5pwd = MD5Util.MD5Encode(password,"utf-8");
         auserMapper.saveInfo(name, md5pwd);
+    }
+
+    @Override
+    public boolean checkAdminByname(String name) {
+        return auserMapper.checkAdminByname(name);
     }
 
     @Override

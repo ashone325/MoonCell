@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class Department {
+public class Game {
     private Integer id;
 
     private String dname;

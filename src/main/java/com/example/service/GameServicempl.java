@@ -1,47 +1,47 @@
 
 package com.example.service;
 
-import com.example.dao.DepartmentMapper;
-import com.example.pojo.Department;
+import com.example.dao.GameMapper;
+import com.example.pojo.Game;
 import com.example.util.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 @Service
-public class DepartmentServicempl implements DepartmentService{
+public class GameServicempl implements GameService {
     @Resource
-    DepartmentMapper departmentMapper;
+    GameMapper gameMapper;
 
     @Override
-    public Result getDepartmentList(int start, int limit) {
-        List<Department> departmentList = departmentMapper.findDepartmentList(start,
+    public Result getgameList(int start, int limit) {
+        List<Game> gameList = gameMapper.findgameList(start,
                 limit);
-        int totalDepartments = departmentMapper.getTotalDepartments();
+        int totalgames = gameMapper.getTotalgames();
         Result result = new Result();
         result.setCode(0);
         result.setMsg("查找成功！");
-        result.setCount(totalDepartments);
-        result.setData(departmentList);
+        result.setCount(totalgames);
+        result.setData(gameList);
         return result;
     }
     @Override
-    public Result getDepartmentListByname(String dname,int start, int limit) {
-        List<Department> departmentList = departmentMapper.findDepartmentListByname(dname,start,
+    public Result getgameListByname(String dname,int start, int limit) {
+        List<Game> gameList = gameMapper.findgameListByname(dname,start,
                 limit);
-        int totalDepartments = departmentMapper.getTotalDepartmentsByname(dname);
+        int totalgames = gameMapper.getTotalgamesByname(dname);
         Result result = new Result();
         result.setCode(0);
         result.setMsg("查找成功！");
-        result.setCount(totalDepartments);
-        result.setData(departmentList);
+        result.setCount(totalgames);
+        result.setData(gameList);
         return result;
     }
 
     @Override
-    public Result addDepartment(Department department) {
+    public Result addgame(Game game) {
         Result result = new Result();
-        if(departmentMapper.insertSelective(department)){
+        if(gameMapper.insertSelective(game)){
             result.setCode(0);
             result.setMsg("添加成功！");
         }
@@ -54,9 +54,9 @@ public class DepartmentServicempl implements DepartmentService{
     }
 
     @Override
-    public Result deleteDepartment(int id) {
+    public Result deletegame(int id) {
         Result result = new Result();
-        if (departmentMapper.deleteByPrimaryKey(id)){
+        if (gameMapper.deleteByPrimaryKey(id)){
             result.setCode(0);
             result.setMsg("删除成功！");
         }
@@ -68,14 +68,14 @@ public class DepartmentServicempl implements DepartmentService{
     }
 
     @Override
-    public Department getDepartmentById(int id) {
-        return departmentMapper.selectByPrimaryKey(id);
+    public Game getgameById(int id) {
+        return gameMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public Result saveDepartment(Department department) {
+    public Result savegame(Game game) {
         Result result = new Result();
-        if (departmentMapper.updateByPrimaryKeySelective(department)){
+        if (gameMapper.updateByPrimaryKeySelective(game)){
             result.setCode(0);
             result.setMsg("修改成功！");
         }

@@ -35,4 +35,6 @@ public interface AuserMapper {
     int updateByPrimaryKey(Auser record);
     @Insert("insert into auser(name,pwd)values(#{name},#{password})")
     void saveInfo(@Param("name") String name, @Param("password") String password);
+    boolean checkAdminByname(String name);//查看是否为管理员
 }
+

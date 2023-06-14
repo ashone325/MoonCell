@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>游戏商城</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>游戏商城</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>游戏ID</th>
+      <th>游戏名称</th>
+      <th>游戏类型</th>
+      <th>游戏价格</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 使用Thymeleaf模板引擎来遍历数据库中的游戏列表 -->
+    <tr th:each="game : ${games}">
+      <td th:text="${game.id}"></td>
+      <td th:text="${game.name}"></td>
+      <td th:text="${game.type}"></td>
+      <td th:text="${game.price}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
