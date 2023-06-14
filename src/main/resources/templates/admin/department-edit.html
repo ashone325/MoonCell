@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>部门新建</title>
+    <title>部门编辑</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -25,24 +25,27 @@
     <div class="layui-row">
         <div class="layui-form">
             <div class="layui-form-item">
+                <input th:if="${departmentInfo!=null}" type="hidden" id="id" name="id" th:value="${departmentInfo?.id}">
+            </div>
+            <div class="layui-form-item">
                 <label for="dname" class="layui-form-label">
                     <span class="x-red">*</span>部门名称</label>
                 <div class="layui-input-inline">
                     <input type="text" id="dname" name="dname" lay-verify="required" placeholder="输入部门名称（必填）"
-                           autocomplete="off" class="layui-input"></div>
+                           autocomplete="off" class="layui-input" th:value="${departmentInfo?.dname}"></div>
             </div>
             <div class="layui-form-item">
                 <label for="dtel" class="layui-form-label">
                     <span class="x-red">*</span>部门电话</label>
                 <div class="layui-input-inline">
                     <input type="text" id="dtel" name="dtel" lay-verify="required" placeholder="输入部门电话（必填）"
-                           autocomplete="off" class="layui-input"></div>
+                           autocomplete="off" class="layui-input" th:value="${departmentInfo?.dtel}"></div>
             </div>
             <div class="layui-form-item">
                 <label for="description" class="layui-form-label">部门描述</label>
                 <div class="layui-input-inline">
                     <input type="text" id="description" name="description" placeholder="输入部门描述"
-                           autocomplete="off" class="layui-input"></div>
+                           autocomplete="off" class="layui-input" th:value="${departmentInfo?.description}"></div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
@@ -57,14 +60,13 @@
         $ = layui.jquery;
         var form = layui.form,
             layer = layui.layer;
-
         //监听提交
         form.on('submit(submit)', function (data) {
             console.log(data.field);
             $.ajax({
-                url: "/admin/department/add",
+                url: "/admin/department/edit",
                 type: "post",
-                data: data.field,//用contoller的第二种方法这个就要改为data: JSON.stringify(data.field),contentType : "application/json",
+                data: data.field,
                 success: function (s) {
                     if (s.code == 0) {
                         layer.msg(s.msg, function () {

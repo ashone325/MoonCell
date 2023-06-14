@@ -37,5 +37,53 @@ public class DepartmentServicempl implements DepartmentService{
         result.setData(departmentList);
         return result;
     }
+
+    @Override
+    public Result addDepartment(Department department) {
+        Result result = new Result();
+        if(departmentMapper.insertSelective(department)){
+            result.setCode(0);
+            result.setMsg("添加成功！");
+        }
+        else {
+            result.setCode(1);
+            result.setMsg("添加失败！");
+        }
+        return result;
+
+    }
+
+    @Override
+    public Result deleteDepartment(int id) {
+        Result result = new Result();
+        if (departmentMapper.deleteByPrimaryKey(id)){
+            result.setCode(0);
+            result.setMsg("删除成功！");
+        }
+        else {
+            result.setCode(1);
+            result.setMsg("删除失败！");
+        }
+        return result;
+    }
+
+    @Override
+    public Department getDepartmentById(int id) {
+        return departmentMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Result saveDepartment(Department department) {
+        Result result = new Result();
+        if (departmentMapper.updateByPrimaryKeySelective(department)){
+            result.setCode(0);
+            result.setMsg("修改成功！");
+        }
+        else {
+            result.setCode(1);
+            result.setMsg("修改失败！");
+        }
+        return result;
+    }
 }
 

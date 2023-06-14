@@ -11,11 +11,11 @@ public interface DepartmentMapper {
 
     int deleteByExample(DepartmentExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    boolean deleteByPrimaryKey(Integer id);
 
     int insert(Department record);
 
-    int insertSelective(Department record);
+    boolean insertSelective(Department record);
 
     List<Department> selectByExample(DepartmentExample example);
 
@@ -25,7 +25,7 @@ public interface DepartmentMapper {
 
     int updateByExample(@Param("record") Department record, @Param("example") DepartmentExample example);
 
-    int updateByPrimaryKeySelective(Department record);
+    boolean updateByPrimaryKeySelective(Department record);
 
     int updateByPrimaryKey(Department record);
     int getTotalDepartments();//查询总记录数
