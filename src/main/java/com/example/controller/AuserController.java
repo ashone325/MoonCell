@@ -60,7 +60,13 @@ public class AuserController {
             session.setAttribute("userimg", auser.getUserimg());
             session.setAttribute("userpower",auser.getUserpower());
             //return "admin/index"; //地址不变，index.html直接加载到当前页面
-            return "redirect:/admin/sys_index"; //地质发生变化，变为admin/sys_index
+            if(auserservice.checkAdminByname(name)){//如果是管理员    //auserservice.checkAdminByname(name)是判断是否是管理员 1是管理员 0是普通用户
+            return "/admin/index"; //地质发生变化，变为admin/sys_index}
+            }
+            else{//如果是普通用户
+                System.out.println(auserservice.checkAdminByname(name));
+                return "/admin/normaluser";
+            }
 
         }
         else {

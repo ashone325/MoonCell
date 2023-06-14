@@ -7,6 +7,15 @@ public class AuserBean implements Serializable {
     private Integer id;
     private String name;
     private String password;
+    private char is_admin;
+
+    public char getIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(char is_admin) {
+        this.is_admin = is_admin;
+    }
 
     public Integer getId() {
         return id;
