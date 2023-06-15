@@ -2,11 +2,14 @@
 package com.example.controller;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.example.pojo.Game;
 import com.example.service.GameService;
+import com.example.service.GameServicempl;
 import com.example.util.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +87,14 @@ public class GameController {
     public boolean reload(HttpSession session){
         String name = session.getAttribute("name").toString();
         return  name != null;
+    }
+
+
+    @GetMapping("/games")
+    public String showGames(Model model) {
+        List<Game> games = gameService.findAllGames();
+        model.addAttribute("games", games);
+        return "game";
     }
 }
 

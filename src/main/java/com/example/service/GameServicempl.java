@@ -85,5 +85,10 @@ public class GameServicempl implements GameService {
         }
         return result;
     }
+
+    @Override
+    public List<Game> findAllGames() {
+        return gameMapper.getAllGames();
+    }
 }
 

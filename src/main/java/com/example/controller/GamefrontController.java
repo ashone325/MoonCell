@@ -1,3 +1,4 @@
+/*
 package com.example.controller;
 
 import com.example.dao.GameMapper;
@@ -31,3 +32,4 @@ public class GamefrontController {
         return mav;
     }
 }
+*/

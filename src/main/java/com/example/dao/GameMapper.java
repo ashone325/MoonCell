@@ -4,8 +4,15 @@ package com.example.dao;
 import com.example.pojo.Game;
 import com.example.pojo.GameExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+@Mapper
 public interface GameMapper {
     long countByExample(GameExample example);
 
@@ -32,6 +39,8 @@ public interface GameMapper {
      List<Game> findgameList(int start, int limit);//分页查询表中记录
     int getTotalgamesByname(String dname);//查询包含dname的总记录数
     List<Game> findgameListByname(String dname, int start, int limit);//按dname分页查询表中记录
-    
+    @Select("select * from game") List<Game> getAllGames();
+
+
 
 }
