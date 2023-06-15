@@ -90,12 +90,8 @@ public class GameController {
     }
 
 
-    @GetMapping("/games")
-    public String showGames(Model model) {
-        List<Game> games = gameService.findAllGames();
-        model.addAttribute("games", games);
-        return "game";
-    }
+
 }
+
 
 
