@@ -13,6 +13,12 @@ public class Game {
     private String dtel;
 
     private String description;
+    private String gamelogo;
+
+    public String getGamelogo() {
+        return gamelogo;
+    }
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date establishmentdate;
     private String image;

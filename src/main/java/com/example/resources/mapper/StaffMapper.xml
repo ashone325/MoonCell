@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.StaffMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.Staff">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="depart_id" jdbcType="INTEGER" property="departId" />
+    <result column="entrydate" jdbcType="DATE" property="entrydate" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="stel" jdbcType="VARCHAR" property="stel" />
+    <result column="semail" jdbcType="VARCHAR" property="semail" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="university" jdbcType="VARCHAR" property="university" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="startdate" jdbcType="DATE" property="startdate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sname, sex, birthday, sid, depart_id, entrydate, nation, nativeplace, stel, semail, 
+    education, degree, university, major, startdate, enddate, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from staff
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.pojo.Staff">
+    insert into staff (id, sname, sex, 
+      birthday, sid, depart_id, 
+      entrydate, nation, nativeplace, 
+      stel, semail, education, 
+      degree, university, major, 
+      startdate, enddate, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{sid,jdbcType=VARCHAR}, #{departId,jdbcType=INTEGER}, 
+      #{entrydate,jdbcType=DATE}, #{nation,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
+      #{stel,jdbcType=VARCHAR}, #{semail,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{degree,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pojo.Staff">
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="departId != null">
+        depart_id,
+      </if>
+      <if test="entrydate != null">
+        entrydate,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="nativeplace != null">
+        nativeplace,
+      </if>
+      <if test="stel != null">
+        stel,
+      </if>
+      <if test="semail != null">
+        semail,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="university != null">
+        university,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="startdate != null">
+        startdate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null">
+        #{departId,jdbcType=INTEGER},
+      </if>
+      <if test="entrydate != null">
+        #{entrydate,jdbcType=DATE},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="stel != null">
+        #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="semail != null">
+        #{semail,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Staff">
+    update staff
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null">
+        depart_id = #{departId,jdbcType=INTEGER},
+      </if>
+      <if test="entrydate != null">
+        entrydate = #{entrydate,jdbcType=DATE},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="stel != null">
+        stel = #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="semail != null">
+        semail = #{semail,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        university = #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        startdate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Staff">
+    update staff
+    set sname = #{sname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      sid = #{sid,jdbcType=VARCHAR},
+      depart_id = #{departId,jdbcType=INTEGER},
+      entrydate = #{entrydate,jdbcType=DATE},
+      nation = #{nation,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      stel = #{stel,jdbcType=VARCHAR},
+      semail = #{semail,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      university = #{university,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findStaffList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from staff
+    order by id desc
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
+  </select>
+  <select id="getTotalStaffs" resultType="int">
+    select count(*) from staff
+  </select>
+</mapper>

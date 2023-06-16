@@ -1,5 +1,9 @@
 
 package com.example.controller;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -9,12 +13,15 @@ import com.example.pojo.Game;
 import com.example.service.GameService;
 import com.example.service.GameServicempl;
 import com.example.util.Result;
+import com.example.util.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -87,6 +94,33 @@ public class GameController {
     public boolean reload(HttpSession session){
         String name = session.getAttribute("name").toString();
         return  name != null;
+    }
+    @PostMapping({"/upload/gamelogo"})
+    @ResponseBody
+    public boolean upload(HttpServletRequest request, @RequestParam("file") MultipartFile file, HttpSession session) throws URISyntaxException {
+        String suffixName = UploadFileUtils.getSuffixName(file);
+        String newFileName = UploadFileUtils.getNewFileName(suffixName);
+
+        String path = System.getProperty("gamelogo.dir") + "/upload/gamelogo/";
+        String realPath = path.replace('/', '\\');
+        //realPath：服务器物理存储地址
+
+        File fileDirectory = new File(realPath);
+        File destFile = new File(realPath + newFileName);  //创建文件
+        try {
+            if (!fileDirectory.exists() && !fileDirectory.mkdirs()) {
+                throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
+            }
+            file.transferTo(destFile);
+
+            URI uri = UploadFileUtils.getHost(new URI(request.getRequestURL() + ""));
+            String sqlImg = uri + "/upload/gamelogo/" + newFileName;  //sqlImg：数据库存储地址
+            session.setAttribute("userimg", sqlImg);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
