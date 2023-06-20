@@ -52,9 +52,7 @@ public class GameController {
     }
 
     @GetMapping("/game/add")
-    public String gotogameadd(){
-        return "admin/game-add";
-    }
+    public String gotogameadd(){return "admin/game-add";}
     @PostMapping("/game/add")
     @ResponseBody
     public Result addgame(@RequestParam("dname") String dname ,@RequestParam("dtel") String dtel,@RequestParam("description") String description){//还可以把(@RequestParam("dname") String dname ,@RequestParam("dtel") String dtel,@RequestParam("description")，改为@RequestParam Map<String,Object> paramas,下面的set也修改为paramas.get("dname").toString()等
