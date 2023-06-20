@@ -65,7 +65,7 @@ public class AuserController {
             }
             else{//如果是普通用户
                 System.out.println(auserservice.checkAdminByname(name));
-                return "/admin/normaluser";
+                return "redirect:/gamefront/game";
             }
 
         }

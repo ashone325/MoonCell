@@ -97,11 +97,11 @@ public class GameController {
     }
     @PostMapping({"/upload/gamelogo"})
     @ResponseBody
-    public boolean upload(HttpServletRequest request, @RequestParam("file") MultipartFile file, HttpSession session) throws URISyntaxException {
+    public boolean upload(HttpServletRequest request, @RequestParam("file") MultipartFile file /*HttpSession session*/) throws URISyntaxException {
         String suffixName = UploadFileUtils.getSuffixName(file);
         String newFileName = UploadFileUtils.getNewFileName(suffixName);
 
-        String path = System.getProperty("gamelogo.dir") + "/upload/gamelogo/";
+        String path = System.getProperty("gamelogo.dir") + "/upload/";
         String realPath = path.replace('/', '\\');
         //realPath：服务器物理存储地址
 
@@ -114,8 +114,8 @@ public class GameController {
             file.transferTo(destFile);
 
             URI uri = UploadFileUtils.getHost(new URI(request.getRequestURL() + ""));
-            String sqlImg = uri + "/upload/gamelogo/" + newFileName;  //sqlImg：数据库存储地址
-            session.setAttribute("userimg", sqlImg);
+            String sqlImg = uri + "/upload/" + newFileName;  //sqlImg：数据库存储地址
+            //session.setAttribute("gamelogo", sqlImg);//
             return true;
         } catch (IOException e) {
             e.printStackTrace();

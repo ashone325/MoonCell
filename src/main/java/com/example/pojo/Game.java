@@ -15,6 +15,10 @@ public class Game {
     private String description;
     private String gamelogo;
 
+    public void setGamelogo(String gamelogo) {
+        this.gamelogo = gamelogo;
+    }
+
     public String getGamelogo() {
         return gamelogo;
     }

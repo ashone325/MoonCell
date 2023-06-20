@@ -24,7 +24,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
     private AdminLoginInterceptor adminLoginInterceptor;
     public void addInterceptors(InterceptorRegistry registry) {
 // 添加一个拦截器，拦截以/admin为前缀的所有路径，排除/admin/userlogin
-        registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/userlogin");
+        registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/userlogin","/admin/signup","admin/success","/admin/admin/register");
     }
 }
 

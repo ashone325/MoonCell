@@ -51,7 +51,7 @@
 
             <div class="layui-input-inline">
                 <button type="button" class="layui-btn" id="choiceImg">选择图片</button>
-                <button type="button" class="layui-btn" id="uploadImg">开始上传</button>
+
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
@@ -97,7 +97,7 @@
     var uploadInst = upload.render({
         elem: '#choiceImg'
         , url: '/admin/upload/gamelogo'
-        , auto: false  //true自动上传，不需要提交按钮
+        , auto: true  //true自动上传，不需要提交按钮
         , bindAction: '#uploadImg'  //指定提交按钮
         , choose: function (obj) {
             obj.preview(function (index, file, result) {

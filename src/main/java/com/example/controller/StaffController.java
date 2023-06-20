@@ -1,4 +1,4 @@
-/*
+package com.example.controller;
 
 import com.example.dao.GameMapper;
 import com.example.pojo.Game;
@@ -46,7 +46,7 @@ public class StaffController {
     public String staffView(@RequestParam Integer id, Model model) {
         Staff staff = staffService.getStaffById(id);  //查找对应id号的员工信息
         //根据该员工的部门号确定对应的部门
-        Game Game = GameService.getGameById(staff.getDepartId());
+        Game Game = GameService.getgameById(staff.getDepartId());
         staff.setDepartname(Game.getDname()); //把该部门的部门名设置到该员工的部门名属性
         model.addAttribute("staffInfo", staff);
         return "admin/staff-view";
@@ -66,7 +66,7 @@ public class StaffController {
         model.addAttribute("education", education);
         model.addAttribute("degree", degree);
         //查找到部门表中第一条到最后一条记录
-        model.addAttribute("departs", GameMapper.findGameList(0, GameMapper.getTotalGames()));
+        model.addAttribute("departs", GameMapper.findgameList(0, GameMapper.getTotalgames()));
         return "admin/staff-add";
     }
 
@@ -77,9 +77,7 @@ public class StaffController {
         staff.setSname(map.get("sname").toString());
         staff.setSex(map.get("sex").toString());
 
-        */
-/*前端向后端的日期转换---*//*
-
+        /*前端向后端的日期转换---*/
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date dayDateSql = null;
         try {
@@ -88,9 +86,7 @@ public class StaffController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        */
-/*---前端向后端的日期转换*//*
-
+        /*---前端向后端的日期转换*/
         staff.setBirthday(dayDateSql);
 
         staff.setSid(map.get("sid").toString());
@@ -140,7 +136,7 @@ public class StaffController {
     @GetMapping("/staff/edit")
     public String gotostaffEdit(@RequestParam Integer id, Model model) {
         Staff staff = staffService.getStaffById(id);
-        Game Game = GameService.getGameById(staff.getDepartId());
+        Game Game = GameService.getgameById(staff.getDepartId());
         staff.setDepartname(Game.getDname());
         model.addAttribute("staffInfo", staff);
         String sex[] = {"男", "女"};
@@ -154,7 +150,7 @@ public class StaffController {
         model.addAttribute("nation", nation);
         model.addAttribute("education", education);
         model.addAttribute("degree", degree);
-        model.addAttribute("departs", GameMapper.findGameList(0, GameMapper.getTotalGames()));
+        model.addAttribute("departs", GameMapper.findgameList(0, GameMapper.getTotalgames()));
         return "admin/staff-edit";
     }
 
@@ -219,4 +215,3 @@ public class StaffController {
         return staffService.saveStaff(staff);
     }
 }
-*/
