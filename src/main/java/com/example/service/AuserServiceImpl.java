@@ -1,7 +1,9 @@
 package com.example.service;
 import com.example.dao.AuserMapper;
 import com.example.pojo.Auser;
+import com.example.pojo.Game;
 import com.example.util.MD5Util;
+import com.example.util.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,6 +13,7 @@ import java.util.List;
 public class AuserServiceImpl implements Auserservice {
     @Resource
     AuserMapper auserMapper;
+
 
     @Override
     public List<Auser> find_user() {
@@ -40,6 +43,18 @@ public class AuserServiceImpl implements Auserservice {
         auser.setPwd(pwd);
         auser.setUserimg(userimg);
         return auserMapper.updateByPrimaryKeySelective(auser);
+    }
+
+    @Override
+    public Result getuserList(int start, int limit) {
+        List<Auser> userList = auserMapper.finduserList(start, limit);
+        int totalusers = auserMapper.getTotalusers();
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg("查找成功！");
+        result.setCount(totalusers);
+        result.setData(userList);
+        return result;
     }
 
 }

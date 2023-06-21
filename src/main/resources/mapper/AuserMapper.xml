@@ -195,5 +195,15 @@
     from auser
     where name = #{name,jdbcType=VARCHAR}
   </select>
-
+  <select id="getTotalusers" resultType="int">
+    select count(*) from auser
+  </select>
+  <select id="finduserList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from auser
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
+  </select>
 </mapper>
