@@ -65,13 +65,13 @@
       elem: '#departmenList',
       id: "departmenListTable",
       url: '/user/listall',
-      title: '游戏列表',
+      title: '用户列表',
       page: true,
       height: "full-110",
       toolbar: true,
       limits: [10],
       cols: [
-        [{type: 'checkbox', field: 'id', fixed: "left"},
+        [{type: 'checkbox', field: 'id', fixed: "left",unresize: "true"},
           {field: 'name', title: '名称', align: "center", unresize: "true"},
           {field: 'pwd', title: '密码', align: 'center', unresize: "true"},
           {title: '操作', align: "center", width: "18%", unresize: "true", toolbar: "#departmenListBar"}]
@@ -81,7 +81,7 @@
     //搜索
     form.on('submit(search_btn)', function (data) {
       tableIns.reload({
-        url: '/admin/game/listbyname',
+        url: '/user/listbyname',
         where: data.field
         , page: {
           curr: 1 //重新从第 1 页开始
@@ -97,8 +97,8 @@
 
       switch (layEvent) {
         case 'del':
-          layer.confirm('确定删除此游戏？', {icon: 3, title: '提示信息'}, function (index) {
-            $.post("/admin/game/delete",
+          layer.confirm('确定删除此用户？', {icon: 3, title: '提示信息'}, function (index) {
+            $.post("/user/delete",
                     {
                       "id": data.id
                     }, function (s) {
@@ -109,7 +109,7 @@
           });
           break;
         case 'edit':
-          xadmin.open('游戏编辑', '/admin/game/edit?id=' + data.id, 450, 300);
+          xadmin.open('用户编辑', '/user/edit?id=' + data.id, 450, 300);
           break;
         default:
           break;
@@ -119,7 +119,7 @@
 
 
   function reload() {
-    $.get("/admin/reload", function (data) {
+    $.get("/user/reload", function (data) {
       if (data) {
         location.reload();
       } else {

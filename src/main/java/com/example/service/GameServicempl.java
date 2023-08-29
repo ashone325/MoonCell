@@ -3,6 +3,7 @@ package com.example.service;
 
 import com.example.dao.GameMapper;
 import com.example.pojo.Game;
+import com.example.pojo.OrderRequest;
 import com.example.util.Result;
 import org.springframework.stereotype.Service;
 
@@ -87,8 +88,16 @@ public class GameServicempl implements GameService {
     }
 
     @Override
+    public void placeOrder(OrderRequest orderRequest) {
+        gameMapper.insertOrder(orderRequest);
+
+    }
+
+    @Override
     public List<Game> findAllGames() {
         return gameMapper.getAllGames();
     }
+
+
 }
 

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.pojo.Game;
+import com.example.pojo.OrderRequest;
 import com.example.service.GameService;
 import com.example.service.GameServicempl;
 import com.example.util.Result;
@@ -87,7 +88,13 @@ public class GameController {
         game.setDescription(description);
         return gameService.savegame(game);
     }
-@ResponseBody
+    @PostMapping("/placeOrder")
+    public String placeOrder(@RequestBody OrderRequest orderRequest) {
+        gameService.placeOrder(orderRequest);
+        return "Order placed successfully";
+    }
+
+    @ResponseBody
     @GetMapping("/reload")
     public boolean reload(HttpSession session){
         String name = session.getAttribute("name").toString();

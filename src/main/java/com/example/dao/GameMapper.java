@@ -5,6 +5,7 @@ import com.example.pojo.Game;
 import com.example.pojo.GameExample;
 import java.util.List;
 
+import com.example.pojo.OrderRequest;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -40,6 +41,8 @@ public interface GameMapper {
     int getTotalgamesByname(String dname);//查询包含dname的总记录数
     List<Game> findgameListByname(String dname, int start, int limit);//按dname分页查询表中记录
     @Select("select * from game") List<Game> getAllGames();
+    void insertOrder(OrderRequest orderRequest);
+
 
 
 

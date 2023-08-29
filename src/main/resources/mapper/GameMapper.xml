@@ -233,4 +233,9 @@
   <select id="getTotalgamesByname" resultType="int">
     select count(*) from game where dname like'%${dname}%'
   </select>
+  <insert id="insertOrder">
+    INSERT INTO orders (game_id, user_id, quantity) VALUES (#{gameId}, #{userId}, #{quantity})
+  </insert>
+
+
 </mapper>

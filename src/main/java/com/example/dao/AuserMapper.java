@@ -21,7 +21,7 @@ public interface AuserMapper {
 
     int deleteByExample(AuserExample example);
 
-    int deleteByPrimaryKey(String name);
+    boolean deleteByPrimaryKey(String name);
 
     int insert(Auser record);
 
@@ -46,5 +46,8 @@ public interface AuserMapper {
     boolean checkAdminByname(String name);//查看是否为管理员
      @Select("select * from auser")  List<Auser> getAllUsers();
     List<Auser> finduserList(int start, int limit);//分页查询表中记录
+    List<Auser> finduserListByname(String dname, int start, int limit);//按dname分页查询表中记录
+    int getTotalusersByname(String dname);//查询包含dname的总记录数
+
 }
 

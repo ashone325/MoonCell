@@ -1,7 +1,9 @@
 package com.example.service;
 import com.example.dao.AuserMapper;
+import com.example.dao.AuserMapper;
 import com.example.pojo.Auser;
 import com.example.pojo.Game;
+import com.example.pojo.Auser;
 import com.example.util.MD5Util;
 import com.example.util.Result;
 import org.springframework.stereotype.Service;
@@ -45,9 +47,11 @@ public class AuserServiceImpl implements Auserservice {
         return auserMapper.updateByPrimaryKeySelective(auser);
     }
 
+
     @Override
     public Result getuserList(int start, int limit) {
-        List<Auser> userList = auserMapper.finduserList(start, limit);
+        List<Auser> userList = auserMapper.finduserList(start,
+                limit);
         int totalusers = auserMapper.getTotalusers();
         Result result = new Result();
         result.setCode(0);
@@ -55,6 +59,67 @@ public class AuserServiceImpl implements Auserservice {
         result.setCount(totalusers);
         result.setData(userList);
         return result;
+    }
+
+
+
+    @Override
+    public Result getUserListByname(String dname,int start, int limit) {
+        List<Auser> userList = auserMapper.finduserListByname(dname,start,
+                limit);
+        int totalusers = auserMapper.getTotalusersByname(dname);
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg("查找成功！");
+        result.setCount(totalusers);
+        result.setData(userList);
+        return result;
+    }
+
+    @Override
+    public Auser getUserByName(String name) {
+        return null;
+    }
+
+
+    @Override
+    public Result deleteUser(String name) {
+        Result result = new Result();
+        if (auserMapper.deleteByPrimaryKey(name)){
+            result.setCode(0);
+            result.setMsg("删除成功！");
+        }
+        else {
+            result.setCode(1);
+            result.setMsg("删除失败！");
+        }
+        return result;
+    }
+
+    @Override
+    public Auser getUserById(String id) {
+        return auserMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Result saveUser(Auser user) {
+        Result result = new Result();
+        if (auserMapper.updateByPrimaryKeySelective(user)){
+            result.setCode(0);
+            result.setMsg("修改成功！");
+        }
+        else {
+            result.setCode(1);
+            result.setMsg("修改失败！");
+        }
+        return result;
+    }
+
+
+
+    @Override
+    public List<Auser> findAllUsers() {
+        return auserMapper.getAllUsers();
     }
 
 }

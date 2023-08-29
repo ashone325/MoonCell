@@ -1,5 +1,6 @@
 package com.example.service;
 import com.example.pojo.Auser;
+import com.example.pojo.Game;
 import com.example.util.Result;
 
 import java.util.List;
@@ -13,6 +14,14 @@ public interface Auserservice {
 
      boolean updateUser(String name,String pwd,String userimg);
     Result getuserList(int page, int limit);
+    Result getUserListByname(String dname,int page, int limit);
+    Auser getUserByName(String name);
+
+    Result deleteUser(String user);
+    Auser getUserById(String id);
+    Result saveUser(Auser user);
+
+    public List<Auser> findAllUsers();
 
 
 }

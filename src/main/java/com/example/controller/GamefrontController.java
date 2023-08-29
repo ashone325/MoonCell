@@ -17,8 +17,8 @@ import javax.annotation.Resource;
 @RequestMapping("/gamefront")//商店页面
 public class GamefrontController {
 
-  @Resource
-  GameService gameService;
+    @Resource
+    GameService gameService;
     @GetMapping("game")
     public String showGames(Model model) {
         List<Game> games = gameService.findAllGames();
