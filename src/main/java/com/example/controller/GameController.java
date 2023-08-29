@@ -127,6 +127,13 @@ public class GameController {
             return false;
         }
     }
+    @GetMapping("/game/details")
+    public String gameDetails(@RequestParam("id") int id, Model model){
+        Game game = gameService.getgameById(id);
+        model.addAttribute("gameDetails", game);
+        return "admin/game-details";
+    }
+
 
 
 
