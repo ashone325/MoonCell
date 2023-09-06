@@ -28,6 +28,8 @@ public interface GameMapper {
     List<Game> selectByExample(GameExample example);
 
     Game selectByPrimaryKey(Integer id);
+    Game getgameById(@Param("Id") int id);
+
 
     int updateByExampleSelective(@Param("record") Game record, @Param("example") GameExample example);
 
@@ -39,6 +41,7 @@ public interface GameMapper {
     int getTotalgames();//查询总记录数
      List<Game> findgameList(int start, int limit);//分页查询表中记录
     int getTotalgamesByname(String dname);//查询包含dname的总记录数
+
     List<Game> findgameListByname(String dname, int start, int limit);//按dname分页查询表中记录
     @Select("select * from game") List<Game> getAllGames();
     void insertOrder(OrderRequest orderRequest);

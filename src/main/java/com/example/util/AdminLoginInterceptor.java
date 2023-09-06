@@ -51,6 +51,8 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
     }
 }
 */
+    //第二次注释，vue用，到最后
+/*
 @Component
 public class AdminLoginInterceptor implements HandlerInterceptor {
     //调用Controller方法前执行。当其返回值为true时，继续向下执行；当其返回值为false时，会中断后续的所有操作。
@@ -82,4 +84,4 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
                                 HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception
     {
     }
-}
+}*/
