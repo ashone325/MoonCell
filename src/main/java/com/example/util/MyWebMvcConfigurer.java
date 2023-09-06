@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 后台系统身份验证拦截器配置
  */
+/*
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
@@ -27,6 +28,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/userlogin","/admin/signup","admin/success","/admin/admin/register");
     }
 }
+*/
 
 
 

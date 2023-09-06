@@ -16,6 +16,7 @@ public interface GameService {
     Result addgame(Game game);
 Result deletegame(int id);
 Game getgameById(int id);
+Game GetGameInfoById(int id);
 Result savegame(Game game);
 void placeOrder(OrderRequest orderRequest);
 

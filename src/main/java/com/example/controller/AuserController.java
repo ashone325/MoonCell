@@ -1,8 +1,10 @@
 package com.example.controller;
 
+import com.example.entity.LoginRequest;
 import com.example.pojo.Auser;
 import com.example.service.Auserservice;
 import com.example.util.MD5Util;
+import com.example.util.Result;
 import com.example.util.UploadFileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:8081")
 public class AuserController {
     @Resource
     Auserservice auserservice;
@@ -77,8 +80,25 @@ public class AuserController {
         }
 
     }
+    //课上增加学习用
+    @PostMapping("/abc")
+    @ResponseBody
+    public com.example.entity.Result abc(@RequestBody LoginRequest loginRequest) {
+        // 从请求体中获取用户名和密码
+        String name = loginRequest.getUsername();
+        String pwd = loginRequest.getPassword();
+
+        // 打印用户名和密码到控制台
+        System.out.println("用户名: " + name);
+        System.out.println("密码: " + pwd);
+
+        // 返回一个简单的成功消息
+        return new com.example.entity.Result(200, "登录请求已接收");
+    }
+
 
     @GetMapping("/signup")
+
     public String disp(){
         return "admin/signup";
     }

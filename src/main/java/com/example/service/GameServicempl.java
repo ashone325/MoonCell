@@ -74,6 +74,13 @@ public class GameServicempl implements GameService {
     }
 
     @Override
+    public Game GetGameInfoById(int id) {
+        Game msg;
+        msg = gameMapper.getgameById(id);
+        return msg;
+    }
+
+    @Override
     public Result savegame(Game game) {
         Result result = new Result();
         if (gameMapper.updateByPrimaryKeySelective(game)){

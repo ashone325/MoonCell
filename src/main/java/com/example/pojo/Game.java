@@ -15,6 +15,16 @@ public class Game {
     private String description;
     private String gamelogo;
 
+    public String getPrice() {
+        return description;
+    }
+
+    public void setPrice(String price) {
+        this.description = price;
+    }
+
+    private String price;
+
     public void setGamelogo(String gamelogo) {
         this.gamelogo = gamelogo;
     }

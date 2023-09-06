@@ -1,5 +1,6 @@
 
 package com.example.controller;
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -129,9 +130,9 @@ public class GameController {
     }
     @GetMapping("/game/details")
     public String gameDetails(@RequestParam("id") int id, Model model){
-        Game game = gameService.getgameById(id);
+        Game game = gameService.GetGameInfoById(id);
         model.addAttribute("gameDetails", game);
-        return "admin/game-details";
+        return "gamefront/gameDetails";
     }
 
 
