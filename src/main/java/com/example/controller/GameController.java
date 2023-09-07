@@ -7,9 +7,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.pojo.Auser;
 import com.example.pojo.Game;
 import com.example.pojo.OrderRequest;
 import com.example.service.GameService;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import com.example.service.Auserservice;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,6 +35,7 @@ public class GameController {
 
   @Resource
   GameService gameService;
+  Auserservice auserservice;
     @GetMapping("/game")
     public String list(){
         return "admin/game-list";
@@ -133,6 +137,27 @@ public class GameController {
         Game game = gameService.GetGameInfoById(id);
         model.addAttribute("gameDetails", game);
         return "gamefront/gameDetails";
+    }
+    @PostMapping("/addGameToUser")
+    @ResponseBody
+    public Map<String, Object> addGameToUser(@RequestParam Integer gameId, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            // 假设您在session中存储了用户信息
+            Auser currentUser = (Auser) session.getAttribute("user");
+            if (currentUser != null) {
+                auserservice.addGameToUser(currentUser.getId(), gameId);
+                map.put("success", true);
+                map.put("message", "游戏已添加到用户");
+            } else {
+                map.put("success", false);
+                map.put("message", "用户未登录");
+            }
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("message", "服务器错误");
+        }
+        return map;
     }
 
 

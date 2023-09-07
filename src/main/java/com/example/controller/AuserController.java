@@ -18,7 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -152,5 +154,27 @@ public class AuserController {
             return false;
         }
     }
+/*    @PostMapping("/addGameToUser")
+    @ResponseBody
+    public Map<String, Object> addGameToUser(@RequestParam Integer gameId, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            // 假设您在session中存储了用户信息
+            Auser currentUser = (Auser) session.getAttribute("user");
+            if (currentUser != null) {
+                auserservice.addGameToUser(currentUser.getId(), gameId);
+                map.put("success", true);
+                map.put("message", "游戏已添加到用户");
+            } else {
+                map.put("success", false);
+                map.put("message", "用户未登录");
+            }
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("message", "服务器错误");
+        }
+        return map;
+    }*/
+
 
 }

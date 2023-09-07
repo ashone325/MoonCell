@@ -6,6 +6,7 @@ import com.example.pojo.Game;
 import com.example.pojo.OrderRequest;
 import com.example.util.Result;
 import org.springframework.stereotype.Service;
+import com.example.dao.AuserMapper;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class GameServicempl implements GameService {
     @Resource
     GameMapper gameMapper;
+    AuserMapper auserMapper;
 
     @Override
     public Result getgameList(int start, int limit) {
@@ -104,6 +106,8 @@ public class GameServicempl implements GameService {
     public List<Game> findAllGames() {
         return gameMapper.getAllGames();
     }
+
+
 
 
 }

@@ -22,6 +22,7 @@ public interface Auserservice {
     Result saveUser(Auser user);
 
     public List<Auser> findAllUsers();
+    public void addGameToUser(int userId, int gameId);
 
 
 }
