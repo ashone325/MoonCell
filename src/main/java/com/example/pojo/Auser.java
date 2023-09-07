@@ -7,7 +7,20 @@ public class Auser {
 
     private String userimg;
     private String userpower;
+    private int id;
 
+
+    public void setUserpower(String userpower) {
+        this.userpower = userpower;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

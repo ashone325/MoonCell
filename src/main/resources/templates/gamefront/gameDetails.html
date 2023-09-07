@@ -27,17 +27,20 @@
 
             <!-- Game Description -->
             <h3>Description</h3>
-            <p th:text="${gameDetails.description}"></p>
+            <p th:text="${gameDetails.gameinfo}"></p>
 
             <!-- Game Price -->
             <h3>Price</h3>
             <p><span th:text="${gameDetails.price}"></span></p>
+            <button id="purchaseGame" th:attr="data-game-id=${gameDetails.id}" onclick="purchaseGame()">购买游戏</button>
+
         </div>
 
         <div class="col-md-4">
-            <!-- Game Thumbnail -->
-            <img th:src="${gameDetails.gamelogo}" alt="Game Thumbnail" class="img-fluid mb-3">
 
+
+】“？
+            。
             <!-- Place Order Button -->
             <button id="placeOrderButton" class="btn btn-primary btn-lg">Place Order</button>
         </div>
@@ -49,6 +52,27 @@
     document.getElementById("placeOrderButton").addEventListener("click", function() {
         // Call the place order API (You need to implement this part according to your backend API)
     });
+    function purchaseGame() {
+        // 获取当前页面上的游戏ID
+        var gameId = document.getElementById("purchaseGame").getAttribute("data-game-id");
+        // 使用AJAX调用后端API进行购买操作
+        $.ajax({
+            url: '/admin/addGameToUser',
+            type: 'POST',
+            data: {
+                gameId: gameId  // 使用正确的参数名称
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert('购买成功！');
+                } else {
+                    alert('购买失败：' + response.message);
+                }
+            }
+        });
+
+
+    }
 </script>
 
 </body>

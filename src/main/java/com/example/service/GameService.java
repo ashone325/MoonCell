@@ -14,7 +14,8 @@ public interface GameService {
     Result getgameList(int page, int limit);
     Result getgameListByname(String dname,int page, int limit);
     Result addgame(Game game);
-Result deletegame(int id);
+
+    Result deletegame(int id);
 Game getgameById(int id);
 Game GetGameInfoById(int id);
 Result savegame(Game game);

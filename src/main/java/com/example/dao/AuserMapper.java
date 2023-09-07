@@ -7,10 +7,7 @@ import java.util.List;
 
 import com.example.pojo.Game;
 import com.example.util.Result;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface AuserMapper {
@@ -48,6 +45,8 @@ public interface AuserMapper {
     List<Auser> finduserList(int start, int limit);//分页查询表中记录
     List<Auser> finduserListByname(String dname, int start, int limit);//按dname分页查询表中记录
     int getTotalusersByname(String dname);//查询包含dname的总记录数
+    int addGameToUser(int userid,int gameid);//将购买游戏添加到usergames表中
+
 
 }
 

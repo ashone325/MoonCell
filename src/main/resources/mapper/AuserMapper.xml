@@ -206,4 +206,8 @@
       limit #{start},#{limit}
     </if>
   </select>
+  <insert id="addGameToUser">
+    INSERT INTO UserGame(userId, gameId) VALUES (#{userId}, #{gameId})
+  </insert>
+
 </mapper>
