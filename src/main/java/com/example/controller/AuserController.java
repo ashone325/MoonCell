@@ -6,6 +6,7 @@ import com.example.service.Auserservice;
 import com.example.util.MD5Util;
 import com.example.util.Result;
 import com.example.util.UploadFileUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.util.StringUtils;
@@ -64,12 +65,19 @@ public class AuserController {
             session.setAttribute("pwd", auser.getPwd());
             session.setAttribute("userimg", auser.getUserimg());
             session.setAttribute("userpower",auser.getUserpower());
+            session.setAttribute("userId", auser.getId());
             //return "admin/index"; //地址不变，index.html直接加载到当前页面
             if(auserservice.checkAdminByname(name)){//如果是管理员    //auserservice.checkAdminByname(name)是判断是否是管理员 1是管理员 0是普通用户
             return "/admin/index"; //地质发生变化，变为admin/sys_index}
             }
             else{//如果是普通用户
+                session.setAttribute("name", auser.getName());
+                session.setAttribute("pwd", auser.getPwd());
+                session.setAttribute("userimg", auser.getUserimg());
+                session.setAttribute("userpower",auser.getUserpower());
+                session.setAttribute("userId", auser.getId());
                 System.out.println(auserservice.checkAdminByname(name));
+                System.out.println(auser.getId());
                 return "redirect:/gamefront/game";
             }
 
@@ -82,6 +90,16 @@ public class AuserController {
         }
 
     }
+    @GetMapping("/api/getCurrentUser")
+    public ResponseEntity<Map<String, Object>> getCurrentUser(HttpSession session) {
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("name", session.getAttribute("name"));
+        userInfo.put("userId", session.getAttribute("userId"));
+        // ... 其他属性
+        System.out.println(userInfo);
+        return ResponseEntity.ok(userInfo);
+    }
+
     //课上增加学习用
     @PostMapping("/abc")
     @ResponseBody

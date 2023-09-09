@@ -35,6 +35,7 @@ public class GameController {
 
   @Resource
   GameService gameService;
+  @Autowired
   Auserservice auserservice;
     @GetMapping("/game")
     public String list(){
@@ -143,17 +144,33 @@ public class GameController {
     public Map<String, Object> addGameToUser(@RequestParam Integer gameId, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         try {
-            // 假设您在session中存储了用户信息
-            Auser currentUser = (Auser) session.getAttribute("user");
-            if (currentUser != null) {
-                auserservice.addGameToUser(currentUser.getId(), gameId);
-                map.put("success", true);
-                map.put("message", "游戏已添加到用户");
+            // 从session中获取用户ID
+            int userId = (int) session.getAttribute("userId");
+            System.out.println(userId);
+            if (userId ==0||userId >0 ) {
+                System.out.println("使用用户ID从数据库或其他数据源中获取完整的Auser对象");
+                Auser currentUser = auserservice.selectByUserId(userId);
+                if (currentUser == null) {
+                    map.put("success", false);
+                    map.put("message", "无法从服务中获取用户");
+                    return map;
+                }
+
+                System.out.println(currentUser);
+                if (currentUser != null) {
+                    auserservice.addGameToUser(currentUser.getId(), gameId);
+                    map.put("success", true);
+                    map.put("message", "游戏已添加到用户");
+                } else {
+                    map.put("success", false);
+                    map.put("message", "无法找到用户");
+                }
             } else {
                 map.put("success", false);
                 map.put("message", "用户未登录");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             map.put("success", false);
             map.put("message", "服务器错误");
         }

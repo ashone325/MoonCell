@@ -48,4 +48,5 @@ public class Auser {
     public void setUserimg(String userimg) {
         this.userimg = userimg == null ? null : userimg.trim();
     }
+
 }

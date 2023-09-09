@@ -36,37 +36,43 @@
         </div>
 
         <div class="col-md-4">
-
+            
         </div>
     </div>
 </div>
 
 <script>
-    // JavaScript code to handle the order logic
-    document.getElementById("placeOrderButton").addEventListener("click", function() {
-        // Call the place order API (You need to implement this part according to your backend API)
-    });
+
     function purchaseGame() {
         // 获取当前页面上的游戏ID
         var gameId = document.getElementById("purchaseGame").getAttribute("data-game-id");
-        // 使用AJAX调用后端API进行购买操作
-        $.ajax({
-            url: '/admin/addGameToUser',
-            type: 'POST',
-            data: {
-                gameId: gameId  // 使用正确的参数名称
-            },
-            success: function(response) {
-                if (response.success) {
-                    alert('购买成功！');
-                } else {
-                    alert('购买失败：' + response.message);
-                }
+        // 从session中获取用户ID
+        $.get('/admin/api/getCurrentUser', function(data) {
+            var userId = data.userId;
+
+            if (userId = null) {
+                alert('请先登录！');
+                return;
             }
+            // 使用AJAX调用后端API进行购买操作
+            $.ajax({
+                url: '/admin/addGameToUser',
+                type: 'POST',
+                data: {
+                    gameId: gameId, // 使用正确的参数名称
+                    userId: userId
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert('购买成功！');
+                    } else {
+                        alert('购买失败：' + response.message);
+                    }
+                }
+            });
         });
-
-
     }
+
 </script>
 
 </body>

@@ -46,6 +46,8 @@ public interface AuserMapper {
     List<Auser> finduserListByname(String dname, int start, int limit);//按dname分页查询表中记录
     int getTotalusersByname(String dname);//查询包含dname的总记录数
     int addGameToUser(int userid,int gameid);//将购买游戏添加到usergames表中
+    Auser selectByUserId(int userid);//用id检查用户信息;
+
 
 
 }

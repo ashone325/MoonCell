@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, dname, dtel, description, establishmentdate
+    id, name, pwd, userimg, is_admin
   </sql>
   <select id="selectByExample" parameterType="com.example.pojo.GameExample" resultMap="BaseResultMap">
     select

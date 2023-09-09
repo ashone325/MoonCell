@@ -15,9 +15,10 @@
     <h1 class="navbar-text text-white">Game List</h1>
     <!-- 添加登录和注册按钮 -->
     <div class="ml-auto">
-        <button class="btn btn-primary" onclick="location.href='/login'">登录</button>
-        <button class="btn btn-secondary" onclick="location.href='/register'">注册</button>
+        <button class="login-btn" onclick="location.href='/admin/userlogin'">登录</button>
+        <button class="register-btn" onclick="location.href='/admin/signup'">注册</button>
     </div>
+
 </nav>
 <div class="container mt-3">
     <div class="row">
@@ -47,5 +48,29 @@
         const gameId = buttonElement.getAttribute('data-id');
         window.location.href = `/gameDetails?gameId=${gameId}`;
     }
+    $(document).ready(function() {
+        console.log("Document ready function started");
+
+        $.get('/admin/api/getCurrentUser', function(data) {
+            var name = data.name;
+            var userId = data.userId;
+
+            console.log("Received data:", data);
+
+            if (userId !== undefined && userId !== null) {
+                console.log("Hiding login and register buttons");
+                $(".login-btn").css("display", "none");
+                $(".register-btn").css("display", "none");
+
+            } else {
+                console.log("Showing login and register buttons");
+                $(".login-btn").show();
+                $(".register-btn").show();
+            }
+        });
+
+        console.log("Document ready function ended");
+    });
+
 </script>
 

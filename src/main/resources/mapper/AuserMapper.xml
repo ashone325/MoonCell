@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    name, pwd, userimg
+    id, name, pwd, userimg, is_admin
   </sql>
   <select id="find_user" resultMap="BaseResultMap">
     select
@@ -207,7 +207,16 @@
     </if>
   </select>
   <insert id="addGameToUser">
-    INSERT INTO UserGame(userId, gameId) VALUES (#{userId}, #{gameId})
+    INSERT INTO usergames (userid, gameid)
+    VALUES (#{userid}, #{gameid})
   </insert>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from auser
+    where id = #{userid,jdbcType=INTEGER}
+  </select>
+
 
 </mapper>

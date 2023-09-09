@@ -127,4 +127,9 @@ public class AuserServiceImpl implements Auserservice {
         auserMapper.addGameToUser(userId, gameId);
     }
 
+    @Override
+    public Auser selectByUserId(int userid) {
+        return auserMapper.selectByUserId(userid);
+    }
+
 }
