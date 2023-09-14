@@ -176,6 +176,13 @@ public class GameController {
         }
         return map;
     }
+    @GetMapping("/myGames")
+    // 获取当前登录的用户
+    public String myGames(@RequestParam("id") int id, Model model){
+        List<Game> game = gameService.getGamesByUserId(id);
+        model.addAttribute("gameDetails", game);
+        return "gamefront/mygames";
+    }
 
 
 

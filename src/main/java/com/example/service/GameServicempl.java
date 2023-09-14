@@ -107,7 +107,10 @@ public class GameServicempl implements GameService {
         return gameMapper.getAllGames();
     }
 
-
+    @Override
+    public List<Game> getGamesByUserId(int userId) {
+        return gameMapper.getGamesByUserId(userId);
+    }
 
 
 }

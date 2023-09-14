@@ -6,6 +6,41 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/maxcdn.bootstrapcdn.com_bootstrap_4.5.2_js_bootstrap.min.js"></script>
+    <style>
+        #gameCarousel {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        .card {
+            transition: transform .2s, box-shadow .2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+        .carousel-item {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 500px; /* 您可以根据需要调整这个值 */
+        }
+        .card-img-top {
+            height: 150px;  /* 您可以根据需要调整这个值 */
+            width: 100%;   /* 使图片宽度填满容器 */
+            object-fit: contain;  /* 保持图片的纵横比 */
+        }
+
+
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -13,18 +48,52 @@
         <img src="/images/Steam_icon_logo.svg.png" alt="Logo" style="width:40px;">
     </a>
     <h1 class="navbar-text text-white">Game List</h1>
+    <form class="form-inline ml-auto">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
     <!-- 添加登录和注册按钮 -->
-    <div class="ml-auto">
-        <button class="login-btn" onclick="location.href='/admin/userlogin'">登录</button>
-        <button class="register-btn" onclick="location.href='/admin/signup'">注册</button>
+    <div class="ml-3">
+        <button class="login-btn btn btn-primary" onclick="location.href='/admin/userlogin'">登录</button>
+        <button class="register-btn btn btn-secondary" onclick="location.href='/admin/signup'">注册</button>
     </div>
+    <button class="my-games-btn btn btn-secondary" style="display: none;" onclick="location.href='/gamefront/myGames?id= userId'">查看我的游戏</button>
+
 
 </nav>
+<div id="gameCarousel" class="carousel slide" data-ride="carousel">
+    <!-- 指示符 -->
+    <ul class="carousel-indicators">
+        <li data-target="#gameCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#gameCarousel" data-slide-to="1"></li>
+        <li data-target="#gameCarousel" data-slide-to="2"></li>
+    </ul>
+
+    <!-- 轮播图片 -->
+    <div class="carousel-inner">
+        <div th:each="game, stat : ${games}" th:if="${stat.count <= 3}" class="carousel-item" th:classappend="${stat.count == 1} ? 'active'" th:style="'background-image: url(' + ${game.gamelogo} + ')'">
+            <div class="carousel-caption">
+                <h3 th:text="${game.dname}"></h3>
+                <p>Game Type: <span th:text="${game.dtel}"></span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 左右切换按钮 -->
+    <a class="carousel-control-prev" href="#gameCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#gameCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-4" th:each="game : ${games}">
             <div class="card">
-                <img class="card-img-top" th:src="${game.gamelogo}" style="width:100%">
+                <img class="card-img-top" th:src="${game.gamelogo}" alt="Game Logo">
                 <div class="card-body">
                     <h4 class="card-title" th:text="${game.dname}"></h4>
                     <p class="card-text">Game Type: <span th:text="${game.dtel}"></span></p>
@@ -41,8 +110,35 @@
         </div>
     </div>
 </div>
+<footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container">
+        <span>&copy; 2024 Your Game Store. All rights reserved.</span>
+        <span class="float-right">Follow us on: <a href="#" class="text-white">Facebook</a> | <a href="#" class="text-white">Twitter</a></span>
+    </div>
+</footer>
 </body>
 </html>
+<script>
+    $(document).ready(function() {
+        $.get('/admin/api/getCurrentUser', function(data) {
+            var name = data.name;
+            var userId = data.userId;
+
+            if (userId !== undefined && userId !== null) {
+                $(".login-btn").css("display", "none");
+                $(".register-btn").css("display", "none");
+                $(".my-games-btn").show();  // 显示查看我的游戏按钮
+                $(".my-games-btn").attr("onclick", "location.href='/gamefront/myGames?id=" + userId + "'");  // 设置按钮的点击事件，使用获取到的userId
+            } else {
+                $(".login-btn").show();
+                $(".register-btn").show();
+                $(".my-games-btn").css("display", "none");  // 隐藏查看我的游戏按钮
+            }
+        });
+    });
+</script>
+
+
 <script>
     function viewDetails(buttonElement) {
         const gameId = buttonElement.getAttribute('data-id');
