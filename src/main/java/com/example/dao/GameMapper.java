@@ -45,6 +45,7 @@ public interface GameMapper {
     List<Game> findgameListByname(String dname, int start, int limit);//按dname分页查询表中记录
     @Select("select * from game") List<Game> getAllGames();
     void insertOrder(OrderRequest orderRequest);
+    List<Game> getGamesByUserId(int userId);
 
 
 

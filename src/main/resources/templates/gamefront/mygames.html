@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Games</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/maxcdn.bootstrapcdn.com_bootstrap_4.5.2_js_bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">
+    <img src="/images/Steam_icon_logo.svg.png" alt="Logo" style="width:40px;">
+  </a>
+  <h1 class="navbar-text text-white">My Games</h1>
+</nav>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-4" th:each="game : ${myGames}">
+      <div class="card">
+        <img class="card-img-top" th:src="${game.gamelogo}" style="width:100%">
+        <div class="card-body">
+          <h4 class="card-title" th:text="${game.dname}"></h4>
+          <p class="card-text">Game Type: <span th:text="${game.dtel}"></span></p>
+          <a th:href="@{/admin/game/details(id=${game.id})}" class="btn btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

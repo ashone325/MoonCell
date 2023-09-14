@@ -4,14 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.pojo.Auser;
 import com.example.pojo.Game;
+import com.example.service.Auserservice;
 import com.example.service.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/gamefront")//商店页面
@@ -19,6 +23,8 @@ public class GamefrontController {
 
     @Resource
     GameService gameService;
+    @Autowired
+    Auserservice auserservice;
     @GetMapping("game")
     public String showGames(Model model) {
         List<Game> games = gameService.findAllGames();
@@ -55,6 +61,8 @@ public class GamefrontController {
     public String showErrorPage() {
         return "error"; // 返回错误页面的模板名
     }
+
+
 
 
 }

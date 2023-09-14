@@ -23,4 +23,7 @@ void placeOrder(OrderRequest orderRequest);
 
 
 public List<Game> findAllGames();
+    List<Game> getGamesByUserId(int userId);
+
 }
+

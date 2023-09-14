@@ -239,6 +239,14 @@
   <select id="getgameById" resultType="com.example.pojo.Game">
     select * from game where id =#{Id}
   </select>
+  <select id="getGamesByUserId" resultType="com.example.pojo.Game">
+    select g.*
+    from usergames ug
+           join game g on ug.gameid = g.id
+    where ug.userid = #{userId}
+  </select>
+
+
 
 
 </mapper>
