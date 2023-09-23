@@ -4,14 +4,12 @@ package com.example.dao;
 import com.example.pojo.Game;
 import com.example.pojo.GameExample;
 import java.util.List;
+import com.example.pojo.Comment;
 
 import com.example.pojo.OrderRequest;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 @Mapper
 public interface GameMapper {
@@ -46,7 +44,9 @@ public interface GameMapper {
     @Select("select * from game") List<Game> getAllGames();
     void insertOrder(OrderRequest orderRequest);
     List<Game> getGamesByUserId(int userId);
-
+    Comment getCommentByGameid(int gameId);
+    //插入评论
+    void insertComment(String Comment,int gameId,int userId);
 
 
 

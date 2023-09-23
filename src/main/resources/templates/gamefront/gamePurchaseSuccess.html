@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>购买成功</title>
+    <style>
+        /* 样式用于居中元素 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        /* 圆形√的样式 */
+        .circle-checkmark {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #4CAF50; /* 绿色背景 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* √ 的样式 */
+        .checkmark {
+            color: white;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+<div class="circle-checkmark">
+    <span class="checkmark">√</span>
+</div>
+<h1>购买成功</h1>
+<a href="/gamefront">返回</a>
+</body>
+</html>

@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, pwd, userimg, is_admin
+    id,dname,dtel,description,establishmentdate,gamelogo,gameinfo
   </sql>
   <select id="selectByExample" parameterType="com.example.pojo.GameExample" resultMap="BaseResultMap">
     select
@@ -245,6 +245,17 @@
            join game g on ug.gameid = g.id
     where ug.userid = #{userId}
   </select>
+  <select id="getCommentByGameid" resultType="com.example.pojo.Comment">
+    select *
+    from comment
+    where gameId = #{gameId}
+  </select>
+  <insert id="insertComment">
+    INSERT INTO comment (gameId, userId, Comment) VALUES (#{gameId}, #{userId}, #{Comment})
+  </insert>
+
+
+
 
 
 

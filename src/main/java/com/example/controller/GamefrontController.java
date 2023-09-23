@@ -2,11 +2,14 @@
 package com.example.controller;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.pojo.Auser;
 import com.example.pojo.Game;
 import com.example.service.Auserservice;
+import com.example.service.CommentService;
 import com.example.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/gamefront")//商店页面
@@ -25,6 +29,9 @@ public class GamefrontController {
     GameService gameService;
     @Autowired
     Auserservice auserservice;
+    @Autowired
+    CommentService commentService;
+
     @GetMapping("game")
     public String showGames(Model model) {
         List<Game> games = gameService.findAllGames();
@@ -70,6 +77,72 @@ public class GamefrontController {
         model.addAttribute("myGames", game);
         return "gamefront/mygames";
     }
+    @GetMapping("/gamePurchaseSuccess")
+    public String gamePurchaseSuccess() {
+        return "gamefront/gamePurchaseSuccess"; // 返回购买成功的HTML模板名称
+    }
+    @PostMapping("/addGameToCart")
+    @ResponseBody
+    public Map<String, Object> addGameToCart(@RequestParam("gameId") int gameId, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            // 从数据库中获取游戏信息
+            Game game = gameService.getgameById(gameId);
+            if (game != null) {
+                // 从session中获取购物车列表
+                Map<Integer, Game> cartItems = (Map<Integer, Game>) session.getAttribute("cartItems");
+
+                // 如果购物车列表为空，则创建一个新的购物车列表
+                if (cartItems == null) {
+                    cartItems = new HashMap<>();
+                }
+
+                // 将游戏对象存储到购物车列表中，使用游戏ID作为键
+                cartItems.put(gameId, game);
+
+                // 将购物车列表重新存储回session中
+                session.setAttribute("cartItems", cartItems);
+
+                map.put("success", true);
+                map.put("message", "游戏已添加到用户购物车");
+            } else {
+                map.put("success", false);
+                map.put("message", "无法找到游戏");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("message", "服务器错误");
+        }
+        return map;
+    }
+
+
+    @GetMapping("/Cart")
+    public String viewCart(HttpSession session, Model model) {
+        // 从会话中获取购物车信息
+        Map<Integer, Game> cart = (Map<Integer, Game>) session.getAttribute("cartItems");
+
+        // 将购物车信息传递给视图
+        model.addAttribute("cart", cart);
+
+        // 返回购物车页面的视图名称
+        return "/gamefront/Cart";
+    }
+    @PostMapping("/insertcomment")
+    public String insertComment(
+            @RequestParam("Comment") String comment,
+            @RequestParam("gameId") int gameId,
+            @RequestParam("userId") int userId) {
+        // 在这里调用CommentService的方法来保存评论到数据库
+        commentService.insertComment(comment, gameId, userId);
+        // 这里可以根据需要进行重定向或返回适当的视图
+        return "redirect:/gamefront/success"; // 假设您有一个成功页面
+    }
+
+
+
+
 
 
 

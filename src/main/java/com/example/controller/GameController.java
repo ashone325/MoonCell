@@ -1,6 +1,5 @@
 
 package com.example.controller;
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -12,10 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.pojo.Auser;
+import com.example.pojo.Comment;
 import com.example.pojo.Game;
 import com.example.pojo.OrderRequest;
+import com.example.service.CommentService;
 import com.example.service.GameService;
-import com.example.service.GameServicempl;
 import com.example.util.Result;
 import com.example.util.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +37,8 @@ public class GameController {
   GameService gameService;
   @Autowired
   Auserservice auserservice;
+  @Resource
+  CommentService commentService;
     @GetMapping("/game")
     public String list(){
         return "admin/game-list";
@@ -136,7 +138,11 @@ public class GameController {
     @GetMapping("/game/details")
     public String gameDetails(@RequestParam("id") int id, Model model){
         Game game = gameService.GetGameInfoById(id);
+        System.out.println(id);
+        Comment comment  = commentService.showcomment(id);
         model.addAttribute("gameDetails", game);
+        model.addAttribute("comment",comment);
+        System.out.println(comment);
         return "gamefront/gameDetails";
     }
     @PostMapping("/addGameToUser")
