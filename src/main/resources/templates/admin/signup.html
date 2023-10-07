@@ -1,20 +1,4 @@
-<!--
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>注册成功</title>
-</head>
-<body>
-<form role="form" action="admin/register" method="post">
-  请输入姓名:<input type="text" name="name" id="name"><br>
-  请输入密码：<input type="password" name="password" id="password"><br>
-  <input type="submit" name="admin/register" value="提交">
-</form>
-</body>
-</html>
--->
-<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
 <head>
   <meta charset="UTF-8">
@@ -34,20 +18,37 @@
   <div class="message">管理系统-管理注册</div>
   <div id="darkbannerwrap"></div>
   <div class="layui-form">
-    <form role="form" action="admin/register" method="post">
+    <form role="form" action="admin/register" method="post" onsubmit="return validatePassword();">
       请输入姓名:<input type="text" name="name" id="name"><br>
       请输入密码：<input type="password" name="password" id="password"><br>
-      <input type="submit" name="admin/register" value="提交">
+      <input type="submit" value="提交">
     </form>
   </div>
 </div>
 <script>
   function enterSubmit(obj) {
-    //当enter 键按下后，需要执行的事件
     var button = document.getElementById('login');
     if (obj.keyCode == 13) {
       button.click();
     }
+  }
+
+  function validatePassword() {
+    var password = document.getElementById('password').value;
+    var letterRegex = /[a-zA-Z]/;
+    var numberRegex = /[0-9]/;
+
+    if (password.length < 6 || password.length > 16) {
+      alert("密码长度必须在6到16之间。");
+      return false;
+    }
+
+    if (!letterRegex.test(password) || !numberRegex.test(password)) {
+      alert("密码必须包含至少一个字母和一个数字。");
+      return false;
+    }
+
+    return true;
   }
 
   layui.config({
@@ -59,17 +60,15 @@
 
     var slider = sliderVerify.render({
       elem: '#slider',
-      // 当验证通过回调
       onOk: function () {
         layer.msg("滑块验证通过");
       }
     });
 
-    // 监听提交
     form.on('submit(login)', function (data) {
-      // 用于表单验证是否已经滑动成功
       if (!slider.isOk()) {
         layer.msg("请先通过滑块验证");
+        return false;
       }
     });
   });
