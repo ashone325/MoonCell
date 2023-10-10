@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Game List</title>
-    <!-- 引入Font Awesome的CSS库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/maxcdn.bootstrapcdn.com_bootstrap_4.5.2_js_bootstrap.min.js"></script>
@@ -49,27 +47,32 @@
     <a class="navbar-brand" href="#">
         <img src="/images/Steam_icon_logo.svg.png" alt="Logo" style="width:40px;">
     </a>
-    <h1 class="navbar-text text-white"><i class="fas fa-gamepad"></i> Game List</h1>
+    <h1 class="navbar-text text-white">Game List</h1>
     <form class="form-inline ml-auto">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    <!-- 添加登录和注册按钮 -->
     <div class="ml-3">
-        <button class="login-btn btn btn-primary" onclick="location.href='/admin/userlogin'"><i class="fas fa-user"></i> 登录</button>
-        <button class="register-btn btn btn-secondary" onclick="location.href='/admin/signup'"><i class="fas fa-user-plus"></i> 注册</button>
+        <button class="login-btn btn btn-primary" onclick="location.href='/admin/userlogin'">登录</button>
+        <button class="register-btn btn btn-secondary" onclick="location.href='/admin/signup'">注册</button>
     </div>
-    <button class="my-games-btn btn btn-primary" style="display: none;" onclick="location.href='/gamefront/myGames?id= userId'"><i class="fas fa-gamepad"></i> 查看我的游戏</button>
+    <button class="my-games-btn btn btn-primary" style="display: none;" onclick="location.href='/gamefront/myGames?id= userId'">查看我的游戏</button>
     <div>
-        <button class="my-cart-btn btn btn-secondary" style="display: none;" onclick="location.href='/gamefront/Cart'"><i class="fas fa-shopping-cart"></i> 查看我的购物车</button>
+        <button class="my-cart-btn btn btn-secondary" style="display: none;" onclick="location.href='/gamefront/Cart'">查看我的购物车</button>
     </div>
-</nav>
 
+
+</nav>
 <div id="gameCarousel" class="carousel slide" data-ride="carousel">
+    <!-- 指示符 -->
     <ul class="carousel-indicators">
         <li data-target="#gameCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#gameCarousel" data-slide-to="1"></li>
         <li data-target="#gameCarousel" data-slide-to="2"></li>
     </ul>
+
+    <!-- 轮播图片 -->
     <div class="carousel-inner">
         <div th:each="game, stat : ${games}" th:if="${stat.count <= 3}" class="carousel-item" th:classappend="${stat.count == 1} ? 'active'" th:style="'background-image: url(' + ${game.gamelogo} + ')'">
             <div class="carousel-caption">
@@ -77,12 +80,15 @@
                 <p>Game Type: <span th:text="${game.dtel}"></span></p>
             </div>
         </div>
+
     </div>
+
+    <!-- 左右切换按钮 -->
     <a class="carousel-control-prev" href="#gameCarousel" data-slide="prev">
-        <span class="carousel-control-prev-icon"><i class="fas fa-arrow-left"></i></span>
+        <span class="carousel-control-prev-icon"></span>
     </a>
     <a class="carousel-control-next" href="#gameCarousel" data-slide="next">
-        <span class="carousel-control-next-icon"><i class="fas fa-arrow-right"></i></span>
+        <span class="carousel-control-next-icon"></span>
     </a>
 </div>
 
@@ -95,24 +101,29 @@
                     <h4 class="card-title" th:text="${game.dname}"></h4>
                     <p class="card-text">Game Type: <span th:text="${game.dtel}"></span></p>
                     <p class="card-text">Price: <span th:text="${game.description}"></span></p>
-                    <a th:href="@{/admin/game/details(id=${game.id})}" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                    <!-- 在这里添加 data-id 属性 -->
+                    <!-- 在这里添加 data-id 属性 -->
+                    <a th:href="@{/admin/game/details(id=${game.id})}" class="btn btn-primary">View Details</a>
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <footer class="footer mt-auto py-3 bg-dark text-white">
     <div class="container">
         <span>&copy; 2024 Your Game Store. All rights reserved.</span>
-        <span class="float-right">Follow us on:
-            <a href="https://www.bilibili.com" class="text-white"><i class="fab fa-bilibili"></i> Bilibili</a> |
-            <a href="https://www.weibo.com" class="text-white"><i class="fab fa-weibo"></i> Weibo</a>
-        </span>
+        <span class="float-right">Follow us on: <a href="https://www.bilibili.com" class="text-white">Bilibili</a> | <a href="https://www.weibo.com" class="text-white">Weibo</a></span>
     </div>
 </footer>
+</body>
+</html>
 
 <script>
+
     $(document).ready(function() {
         $.get('/admin/api/getCurrentUser', function(data) {
             var name = data.name;
@@ -136,6 +147,8 @@
         });
     });
 </script>
+
+
 <script>
     function viewDetails(buttonElement) {
         const gameId = buttonElement.getAttribute('data-id');
@@ -167,5 +180,3 @@
 
 </script>
 
-</body>
-</html>
