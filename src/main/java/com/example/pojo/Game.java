@@ -15,6 +15,7 @@ public class Game {
     private String description;
     private String gamelogo;
     private String gameinfo;
+    private String esmdate;
 
     public String getGameinfo() {
         return gameinfo;

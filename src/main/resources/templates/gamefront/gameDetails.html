@@ -40,31 +40,41 @@
             <p><span th:text="${gameDetails.price}"></span></p>
             <button id="purchaseGame" th:attr="data-game-id=${gameDetails.id}" onclick="purchaseGame()" class="btn btn-primary">购买游戏</button>
             <button id="addToCart" th:attr="data-game-id=${gameDetails.id}" onclick="addToCart()" class="btn btn-secondary">添加到购物车</button>
+
             <h3>评论区</h3>
-            <ul>
+            <div class="comments-section">
                 <!-- 使用Thymeleaf迭代渲染评论 -->
-                <li th:each="c : ${comment}">
-                    <p th:text="${c.Comment}"></p>
-                    <p th:text="${c.getUserId()}"></p>
-                    <!-- 添加其他评论相关信息 -->
-                    <!-- 评论表单 -->
-                </li>
-                <h3>添加评论</h3>
-                <form action="/gamefront/insertcomment" method="POST">
+                <div th:each="c : ${comment}" class="card mb-3">
+                    <div class="card-header">
+                        <strong th:text="${c.getUserId()}"></strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" th:text="${c.Comment}"></p>
+                        <button class="btn btn-sm btn-outline-primary">有用</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3>添加评论</h3>
+            <div class="add-comment-section">
+                <form action="/gamefront/insertcomment" method="POST" class="p-3 border rounded">
                     <!-- 游戏ID字段 -->
                     <input type="hidden" name="gameId" th:value="${gameDetails.id}">
 
                     <!-- 用户ID字段（如果需要的话） -->
-                    <input type="hidden" name="userId" th:value="${session.userId}"> <!-- 这里的 userId 需要根据您的实际需求设置 -->
+                    <input type="hidden" name="userId" th:value="${session.userId}">
 
                     <!-- 评论内容输入框 -->
-                    <textarea name="Comment" rows="4" cols="50" placeholder="在此处输入评论内容"></textarea>
+                    <div class="form-group">
+                        <label for="commentTextarea">评论内容:</label>
+                        <textarea name="Comment" id="commentTextarea" rows="4" class="form-control" placeholder="在此处输入评论内容"></textarea>
+                    </div>
 
                     <!-- 提交按钮 -->
                     <button type="submit" class="btn btn-primary">提交评论</button>
                 </form>
-            </ul>
-        </div>
+            </div>
+            </div>
     </div>
 </div>
 
@@ -75,8 +85,8 @@
 
         // 使用AJAX调用购物车添加方法
         $.ajax({
-            url: '/gamefront/addGameToCart', // 这里应该是购物车添加方法的URL
-            type: 'POST', // 根据您的方法类型进行调整
+            url: '/gamefront/addGameToCart',
+            type: 'POST',
             data: {
                 gameId: gameId
             },

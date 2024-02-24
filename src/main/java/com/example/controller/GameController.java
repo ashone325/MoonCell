@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.dto.CommentDetailDto;
 import com.example.pojo.Auser;
 import com.example.pojo.Comment;
 import com.example.pojo.Game;
@@ -189,6 +190,28 @@ public class GameController {
         model.addAttribute("gameDetails", game);
         return "gamefront/mygames";
     }
+    @PostMapping("/comment/delete")
+    @ResponseBody
+    public Result deleteComment(@RequestParam("commentId") Long commentId) {
+        Result result = new Result();
+        try {
+            commentService.deleteCommentById(commentId);
+            result.setSuccess(true);
+            result.setMessage("评论删除成功");
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除评论失败: " + e.getMessage());
+        }
+        return result;
+    }
+    @GetMapping("/comments")
+    public String comments(Model model) {
+        List<CommentDetailDto> commentsList = commentService.getAllComments();
+        model.addAttribute("comments", commentsList);
+        return "admin/comments"; // 确保有一个对应的Thymeleaf模板文件
+    }
+
+
 
 
 

@@ -1,6 +1,7 @@
 
 package com.example.dao;
 
+import com.example.dto.CommentDetailDto;
 import com.example.pojo.Game;
 import com.example.pojo.GameExample;
 import java.util.List;
@@ -47,6 +48,8 @@ public interface GameMapper {
     Comment getCommentByGameid(int gameId);
     //插入评论
     void insertComment(String Comment,int gameId,int userId);
+    void deleteCommentById(Long commentId); // 新增删除评论的方法
+    List<CommentDetailDto> findAllCommentsWithDetails();
 
 
 

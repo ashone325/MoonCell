@@ -12,6 +12,9 @@ public class Result<T> implements Serializable {
     private long count;
     private List<T> data;
     private T tdata;
+    private boolean success;
+    private String message;
+
 
     public int getCode() {
         return code;
@@ -53,4 +56,9 @@ public class Result<T> implements Serializable {
         this.count = count;
     }
 
+    public void setSuccess(boolean b) {this.success = b;
+    }
+
+    public void setMessage(String msg) {this.message = msg;
+    }
 }

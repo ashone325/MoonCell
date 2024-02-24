@@ -253,8 +253,15 @@
   <insert id="insertComment">
     INSERT INTO comment (gameId, userId, Comment) VALUES (#{gameId}, #{userId}, #{Comment})
   </insert>
-
-
+  <delete id="deleteCommentById" parameterType="long">
+    DELETE FROM comment WHERE id = #{commentId}
+  </delete>
+  <select id="findAllCommentsWithDetails" resultType="com.example.dto.CommentDetailDto">
+    SELECT c.id, c.comment, g.dname AS gameName, u.name AS userName
+    FROM comment c
+           JOIN game g ON c.gameId = g.id
+           JOIN auser u ON c.userId = u.id;
+  </select>
 
 
 

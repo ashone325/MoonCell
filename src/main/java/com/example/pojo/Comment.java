@@ -3,6 +3,15 @@ public class Comment {
     private int userId;
     private int gameId;
     private String Comment;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getUserId() {
         return userId;
